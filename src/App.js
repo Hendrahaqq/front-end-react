@@ -7,22 +7,26 @@ import Card from './Card.js'
 
 function App() {
 
+  const [query, setQuery] = useState('')
+const [url, setUrl] = useState(`https://api.flickr.com/services/feeds/photos_public.gne?tagmode=any&format=json&nojsoncallback=callback`)
   const [datas, setDatas] = useState([])
 
-  useEffect((tag) => {
-    axios.get(tag ? 'https://api.flickr.com/services/feeds/photos_public.gne?tagmode=any&format=json&nojsoncallback=callback&tag='+tag
-     : 'https://api.flickr.com/services/feeds/photos_public.gne?tagmode=any&format=json&nojsoncallback=callback')
-    .then(res => {
-      console.log(res.data.items)
-      setDatas(res.data.items)
-    })
-  }, [])
+  useEffect(() => {
+    async function fetchData() {
+      console.log(url)
+      await axios.get(url)
+      .then(res => {
+        console.log(res.data.items)
+        setDatas(res.data.items)
+      })
+    }
+    
+    fetchData()
+    
+  }, [url])
 
 
-  const showDatas = datas.map((data) => <Card media={data.media.m} key={data.author_id}></Card>
-  
-
-  )
+  const showDatas = datas.length ? datas.map((data, index) => <Card media={data.media.m} key={index}></Card>) : <div className="no-data">No Data Found</div>
 
   return (
     <div className="App">
@@ -31,13 +35,13 @@ function App() {
         <div className="d-flex justify-content-end align-items-center">
           
         <div className="d-flex align-items-center flex-end">
-          <input type="text" className="input-search me-2" placeholder="search here"/>
-          <button className="btn-search">Cari</button>
+          <input type="text" value={query}  onChange={e => setQuery(e.target.value)} className="input-search me-2" placeholder="search here"/>
+          <button className="btn-search" onClick={() => setUrl(`https://api.flickr.com/services/feeds/photos_public.gne?tagmode=any&format=json&nojsoncallback=callback&tags=${query}`)}>Cari</button>
         </div>
         
         </div>
         <span className="font-bold text-title">Image List :</span>
-        <div className="row mt-4">
+        <div className="row mt-4 text-center">
           {showDatas}
          
         </div>
