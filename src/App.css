@@ -1,38 +1,50 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg : #F4F9F9;
+  --color: #CCF2F4;
+  --color-2: #A4EBF3;
+  --color-3: #AAAAAA;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  font-family: 'Quicksand', sans-serif;
+}
+.font-bold {
+  font-weight: 700;
+}
+body {
+  background: var(--bg);
+}
+.hero-text {
+  font-size: 4rem;
+  font-weight: 900;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.nav {
+  background: #fff);
+  padding: 1rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.nav>span {
+  font-weight: 700;
+  font-size: 1.5rem;
 }
 
-.App-link {
-  color: #61dafb;
-}
+.input-search {
+  height: 2.5rem;
+  padding: 0 10px;
+  border-radius: 10px;
+  border: 1px solid #AAAAAA;
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+}
+.btn-search {
+  background: #AAAAAA;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  padding: .4rem 1rem;
+}
+.btn-search:hover {
+  background: #7c7c7c;
 }
