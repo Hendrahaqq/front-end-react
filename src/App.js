@@ -10,7 +10,8 @@ function App() {
   const [datas, setDatas] = useState([])
 
   useEffect((tag) => {
-    axios.get(tag ? 'https://api.flickr.com/services/feeds/photos_public.gne?tagmode=any&format=json&nojsoncallback=callback&tag='+tag : 'https://api.flickr.com/services/feeds/photos_public.gne?tagmode=any&format=json&nojsoncallback=callback')
+    axios.get(tag ? 'https://api.flickr.com/services/feeds/photos_public.gne?tagmode=any&format=json&nojsoncallback=callback&tag='+tag
+     : 'https://api.flickr.com/services/feeds/photos_public.gne?tagmode=any&format=json&nojsoncallback=callback')
     .then(res => {
       console.log(res.data.items)
       setDatas(res.data.items)
