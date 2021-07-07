@@ -8,7 +8,7 @@ import Card from './Card.js'
 function App() {
 
   const [query, setQuery] = useState('')
-const [url, setUrl] = useState(`https://api.flickr.com/services/feeds/photos_public.gne?tagmode=any&format=json&nojsoncallback=callback`)
+const [url, setUrl] = useState(`https://api-hendra-node.herokuapp.com/get`)
   const [datas, setDatas] = useState([])
 
   useEffect(() => {
@@ -16,8 +16,8 @@ const [url, setUrl] = useState(`https://api.flickr.com/services/feeds/photos_pub
       console.log(url)
       await axios.get(url)
       .then(res => {
-        console.log(res.data.items)
-        setDatas(res.data.items)
+        console.log(res.data)
+        setDatas(res.data)
       })
     }
     
@@ -36,7 +36,7 @@ const [url, setUrl] = useState(`https://api.flickr.com/services/feeds/photos_pub
           
         <div className="d-flex align-items-center flex-end">
           <input type="text" value={query}  onChange={e => setQuery(e.target.value)} className="input-search me-2" placeholder="search here"/>
-          <button className="btn-search" onClick={() => setUrl(`https://api.flickr.com/services/feeds/photos_public.gne?tagmode=any&format=json&nojsoncallback=callback&tags=${query}`)}>Cari</button>
+          <button className="btn-search" onClick={() => setUrl(`https://api-hendra-node.herokuapp.com/get?tag=${query}`)}>Cari</button>
         </div>
         
         </div>
