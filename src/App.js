@@ -35,9 +35,11 @@ function App() {
     <div className="App">
       <Nav/>
       <div className="container mx-auto py-5 ">
-        <div className="d-flex justify-content-end align-items-center">
+        <div className="d-flex justify-content-end align-items-center mb-5 mb-md-0">
           
-        <div className="d-flex align-items-center flex-end">
+        <div className="d-flex align-items-center flex-end top-container">
+          <div className="search-container">
+          <i className="fas fa-search search-icon"></i>
           <input type="text" value={query}  onChange={e => setQuery(e.target.value) } 
           onKeyUp = {() =>{ 
             setTimeout(() => {
@@ -45,24 +47,23 @@ function App() {
             }, 1000)
           }
         }
-          className="input-search me-2" placeholder="search here"/>
+          className="input-search me-2" placeholder="search here" /> 
+          </div>
+        
+          
+          
         </div>
         
         </div>
-        <span className="font-bold text-title">Image List :</span>
-        <div className="row mt-4 text-center">
+        <span className="font-bold text-title">Image List From Flickr:</span>
+        <div className="row mt-1 mt-md-4 text-center">
           {showDatas}
-         
         </div>
 
         <div className="col-12 mt-5 text-center">
           copyright 2021 - Hendra
-
-
         </div>
-      </div>
-      
-      
+      </div>      
     </div>
   );
 }
