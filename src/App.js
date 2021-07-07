@@ -8,15 +8,17 @@ import Card from './Card.js'
 function App() {
 
   const [query, setQuery] = useState('')
-const [url, setUrl] = useState(`https://api-hendra-node.herokuapp.com/get`)
+  const [loading, setLoading] = useState(false)
+  const [url, setUrl] = useState(`https://api-hendra-node.herokuapp.com/get`)
   const [datas, setDatas] = useState([])
 
   useEffect(() => {
     async function fetchData() {
-     
+      setLoading(true)
       await axios.get(url)
       .then(res => {
         setDatas(res.data)
+        setLoading(false)
       })
     }
     
@@ -25,7 +27,9 @@ const [url, setUrl] = useState(`https://api-hendra-node.herokuapp.com/get`)
   }, [url])
 
 
-  const showDatas = datas.length ? datas.map((data, index) => <Card media={data.media.m} key={index}></Card>) : <div className="no-data">No Data Found</div>
+  const showDatas = loading ? <div className="spinner-border mx-auto" role="status">
+
+</div> : datas.length ? datas.map((data, index) => <Card media={data.media.m} key={index}></Card>) : <div className="no-data">No Data Found</div>
 
   return (
     <div className="App">
@@ -34,8 +38,14 @@ const [url, setUrl] = useState(`https://api-hendra-node.herokuapp.com/get`)
         <div className="d-flex justify-content-end align-items-center">
           
         <div className="d-flex align-items-center flex-end">
-          <input type="text" value={query}  onChange={e => setQuery(e.target.value)} className="input-search me-2" placeholder="search here"/>
-          <button className="btn-search" onClick={() => setUrl(`https://api-hendra-node.herokuapp.com/get?tag=${query}`)}>Cari</button>
+          <input type="text" value={query}  onChange={e => setQuery(e.target.value) } 
+          onKeyUp = {() =>{ 
+            setTimeout(() => {
+              setUrl(`https://api-hendra-node.herokuapp.com/get?tag=${query}`)
+            }, 1000)
+          }
+        }
+          className="input-search me-2" placeholder="search here"/>
         </div>
         
         </div>
@@ -43,6 +53,12 @@ const [url, setUrl] = useState(`https://api-hendra-node.herokuapp.com/get`)
         <div className="row mt-4 text-center">
           {showDatas}
          
+        </div>
+
+        <div className="col-12 mt-5 text-center">
+          copyright 2021 - Hendra
+
+
         </div>
       </div>
       
