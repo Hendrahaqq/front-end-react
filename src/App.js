@@ -13,10 +13,9 @@ const [url, setUrl] = useState(`https://api-hendra-node.herokuapp.com/get`)
 
   useEffect(() => {
     async function fetchData() {
-      console.log(url)
+     
       await axios.get(url)
       .then(res => {
-        console.log(res.data)
         setDatas(res.data)
       })
     }
